@@ -37,8 +37,9 @@ test1_and_test2 = grades.iloc[0:2]
 
 # view only Eva's and Katie's Grades for Test1 and Test2
 
-eva_and_katie_test1_test2 = grades[["Eva", "Katie"]].loc["Test1":"Test2"]
-# OR grades.loc[:'Test2',['Eva','Katie']]
+eva_and_katie_test1_test2 = grades["Eva":"Katie"].loc["Test1":"Test2"]
+print(eva_and_katie_test1_test2)
+grades.loc[:"Test2", ["Eva", "Katie"]]
 
 # view only Sam's thru Bob's grades for Test 1 and Test3
 

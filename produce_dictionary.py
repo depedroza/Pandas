@@ -44,42 +44,58 @@ produce_dictionary = {
     "Bok choy": [1.42, 11565, 16422],
 }
 
+"""Use the dictionary to create a data frame with the produce names as rows and columns named - "Cost Per Pound", "Quantity Sold" and "Total Sale"."""
 produce = pd.DataFrame(produce_dictionary)
 produce.index = ["Cost Per Pound", "Quantity Sold", "Total Sale"]
-print(produce)
-
-""" 1. Produce that had the highest and lowest sales in total sales (both name of produce and value) """
-print(produce.max(axis=1))
-
+print(produce)  # To confirm array
+produceT = produce.T
+print(produceT)  # To look at produce.T
 print()
-'''
-""" 2. Using 'loc', display the quantity and total sales for 'Orange' and 'Beets' (together)"""
-print()
+print(
+    " 1. Produce that had the highest and lowest sales in total sales (both name of produce and value)"
+)
 
+print(
+    f'Max Total Sales: {produceT["Total Sale"].idxmax()} ${produceT["Total Sale"].max():.2F}'
+)
 print()
-
-""" 3. Using 'loc', display the total sales for 'Apples' through 'Lettuce"""
-print()
-
-print()
-
-""" 4. Using 'at', update the quantity sold for Apricots to 11,955 and total sales to 44,353.05"""
+print(
+    " 2. Using 'loc', display the quantity and total sales for 'Orange' and 'Beets' (together)"
+)
+print(produce[["Orange", "Beets"]].loc["Quantity Sold":"Total Sale"])
 print()
 
+print("3. Using 'loc', display the total sales for 'Apples' through 'Lettuce")
+print(produceT["Total Sale"].loc["Apples":"Lettuce"])
 print()
 
-""" 5. What is the average quantity sold across all products? (print out ONLY quantity sold)"""
+print(
+    "4. Using 'at', update the quantity sold for Apricots to 11,955 and total sales to 44,353.05"
+)
+print(produceT.loc["Apricots"])
+produceT.at["Apricots", "Quantity Sold"] = 11955.0
+produceT.at["Apricots", "Total Sale"] = 44353.05
+print(produceT.loc["Apricots"])
 print()
 
+print(
+    "5. What is the average quantity sold across all products? (print out ONLY quantity sold)"
+)
+print(produceT["Quantity Sold"].mean())
 print()
 
-""" 6. Create a new dataframe for only those produce that have sold between 11,500 to 12,000 (quantity)"""
+print(
+    "6. Create a new dataframe for only those produce that have sold between 11,500 to 12,000 (quantity)"
+)
+produce_new = produceT[
+    (produceT["Quantity Sold"] > 11500) & (produceT["Quantity Sold"] <= 12000)
+]
+print(produce_new)
 print()
 
-print()
+print(
+    "7. What is the total sales for the products in the above new dataframe? (print out ONLY total sales)"
+)
+print(produce_new["Total Sale"].sum())
 
-""" 7. What is the total sales for the products in the above new dataframe? (print out ONLY total sales)"""
 print()
-
-print()
-'''
